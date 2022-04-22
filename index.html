@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <title>Execicio2</title>
+    <style>
+        body {
+    background-color: rgb(134, 134, 208);
+    font: normal 15pt arial;
+}
+header {
+    color: white;
+    text-align: center;
+}
+section{
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    width: 500px;
+    margin: auto;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.375);
+}
+div {
+    text-align: center;
+    padding: 5px;
+}
+footer {
+    color: white;
+    text-align: center;
+    font-style: italic;
+}
+img {
+    width: 300px;
+}
+#button {
+    background-color: #228B22;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+#button:hover {
+    background-color: red;
+    box-shadow: 5px 5px 10px black;
+}
+.whatsapp-link {
+    
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 30px;
+    
+    border-radius: 50%;
+}
+.fa-whatsapp {
+    margin-top: 1px ;
+}
+a:hover {
+    color: #228B22;
+}
+.grow:hover {
+    -webkit-transform: scale(2.1);
+    -ms-transform: scale(2.1);
+    transform: scale(2.1);
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Verificador de Idade</h1>
+    </header>
+    <section>
+        <div>
+            <p>
+                Ano de Nascimento:
+                    <input type="number" name="txtano" id="txtano" min="" max=""><!--Para alterar tamanho do input "min","max"-->
+            </p>
+            <p>
+                Sexo:
+                <input type="radio" name="radsex" id="mas" checked>
+                <label for="mas">Masculino</label>
+                <input type="radio" name="radsex" id="fem">
+                <label for="fem">Feminino</label>
+            </p>
+            <p>
+                <input id="button" type="button" value="Verificar" onclick="verificar()">
+            </p>
+        </div>
+        <div id="res">
+            Preencha os dados acima para ver o resultado!
+        </div>
+    </section>
+    <footer>
+        <p>&copy;Roberto Conrado</p><a class="whatsapp-link" href="https://web.whatsapp.com/send?phone=5577991556513" target="_blank">
+            <i class="grow fa fa-whatsapp"></i>
+    </footer>
+    <script>
+        function verificar() {
+            var data = new Date()
+            var ano = data.getFullYear()
+            var fano = document.getElementById('txtano')
+            var res = document.querySelector('div#res')
+            if (fano.value.length == 0 || Number(fano.value) > ano) {
+                window.alert('[ERRO] Verifique os dados e tente novamente')
+            } else {
+                var fsex = document.getElementsByName('radsex')
+                var idade = ano - Number(fano.value)
+                //res.innerHTML = `Idade calculada: ${idade}`
+                var genero = ''
+                var img = document.createElement('img')
+                img.setAttribute('id', 'foto')
+                if (fsex[0].checked) {
+                    genero = 'Homem'
+                    if (idade >=0 && idade <15){
+                        //criança
+                        img.setAttribute('src','img/kgarotinho.jpg')
+                        document.body.style.background=`#FF665A`
+                    } else if (idade < 21) {
+                        //jovem
+                        img.setAttribute('src','img/garoto.png')
+                        document.body.style.background=`#705E78`
+                    } else if (idade < 50) {
+                        //adulto
+                        img.setAttribute('src','img/H-adulto.png') 
+                        document.body.style.background=`#FFF587`
+                    } else {
+                        //idoso
+                        img.setAttribute('src','img/H-idoso.jpg')
+                        document.body.style.background=`#A3A1A8`
+                    }
+                } else if (fsex[1].checked) {
+                    genero = 'Mulher'
+                    if (idade >=0 && idade <15){
+                        //criança
+                        img.setAttribute('src','img/garotinha.png')
+                        document.body.style.background=`#FF8C64`
+                    } else if (idade < 21) {
+                        //jovem
+                        img.setAttribute('src','img/garota.jpg')
+                        document.body.style.background=`#A5AAA3`
+                    } else if (idade < 50) {
+                        //adulto
+                        img.setAttribute('src','img/M-adulta.png')
+                        document.body.style.background=`#812F33`
+                    } else {
+                        //idoso
+                        img.setAttribute('src','img/M-idosa.png')
+                        document.body.style.background=`#FEA443`
+                    } 
+                }  
+                res.style.textAlign = 'center'
+                res.innerHTML = `Detectamos ${genero} com ${idade} anos.` 
+                res.appendChild(img)
+            }
+        }
+    </script>
+</body>
+</html>
+<!--https://www.youtube.com/watch?v=f5es-PpaUI8&list=PLHz_AreHm4dlsK3Nr9GVvXCbpQyHQl1o1&index=21-->
+<!--AULA JS PARA ENTENDIMENTOS FUTUROS-->
